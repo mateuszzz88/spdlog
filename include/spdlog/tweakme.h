@@ -55,6 +55,7 @@
 // #define SPDLOG_DEBUG_ON
 // #define SPDLOG_TRACE_ON
 #define SPDLOG_MIN_LEVEL 1 // 1==SPDLOG_LOGLEVEL_DEBUG
+// #define ENABLE_TRACING
 ///////////////////////////////////////////////////////////////////////////////
 
 

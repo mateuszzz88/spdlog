@@ -171,50 +171,56 @@ void drop_all();
 #define __SPD_PRETTY_FUNCTION__ __PRETTY_FUNCTION__
 #endif
 
+#ifdef ENABLE_TRACING
+#define MAYBE_TRACE update_tracer(__FILE__, __LINE__, __FUNCTION__, __SPD_PRETTY_FUNCTION__).
+#else
+#define MAYBE_TRACE
+#endif
+
 
 #if SPDLOG_MIN_LEVEL <= SPDLOG_LOGLEVEL_TRACE or defined(SPDLOG_TRACE_ON)
-#define SPDLOG_TRACE(logger, ...) logger->update_tracer(__FILE__, __LINE__, __FUNCTION__, __SPD_PRETTY_FUNCTION__).trace(__VA_ARGS__)
-#define SPDLOG_TRACE_IF(logger, flag, ...) logger->update_tracer(__FILE__, __LINE__, __FUNCTION__, __SPD_PRETTY_FUNCTION__).trace_if(flag, __VA_ARGS__)
+#define SPDLOG_TRACE(logger, ...) logger-> MAYBE_TRACE trace(__VA_ARGS__)
+#define SPDLOG_TRACE_IF(logger, flag, ...) logger-> MAYBE_TRACE trace_if(flag, __VA_ARGS__)
 #else
 #define SPDLOG_TRACE(logger, ...)
 #define SPDLOG_TRACE_IF(logger, flag, ...)
 #endif
 
 #if SPDLOG_MIN_LEVEL <= SPDLOG_LOGLEVEL_DEBUG or defined(SPDLOG_DEBUG_ON)
-#define SPDLOG_DEBUG(logger, ...) logger->update_tracer(__FILE__, __LINE__, __FUNCTION__, __SPD_PRETTY_FUNCTION__).debug(__VA_ARGS__)
-#define SPDLOG_DEBUG_IF(logger, flag, ...) logger->update_tracer(__FILE__, __LINE__, __FUNCTION__, __SPD_PRETTY_FUNCTION__).debug_if(flag, __VA_ARGS__)
+#define SPDLOG_DEBUG(logger, ...) logger-> MAYBE_TRACE debug(__VA_ARGS__)
+#define SPDLOG_DEBUG_IF(logger, flag, ...) logger-> MAYBE_TRACE debug_if(flag, __VA_ARGS__)
 #else
 #define SPDLOG_DEBUG(logger, ...)
 #define SPDLOG_DEBUG_IF(logger, flag, ...)
 #endif
 
 #if SPDLOG_MIN_LEVEL <= SPDLOG_LOGLEVEL_INFO
-#define SPDLOG_INFO(logger, ...) logger->update_tracer(__FILE__, __LINE__, __FUNCTION__, __SPD_PRETTY_FUNCTION__).info(__VA_ARGS__)
-#define SPDLOG_INFO_IF(logger, flag, ...) logger->update_tracer(__FILE__, __LINE__, __FUNCTION__, __SPD_PRETTY_FUNCTION__).info_if(flag, __VA_ARGS__)
+#define SPDLOG_INFO(logger, ...) logger-> MAYBE_TRACE info(__VA_ARGS__)
+#define SPDLOG_INFO_IF(logger, flag, ...) logger-> MAYBE_TRACE info_if(flag, __VA_ARGS__)
 #else
 #define SPDLOG_INFO(logger, ...)
 #define SPDLOG_INFO_IF(logger, flag, ...)
 #endif
 
 #if SPDLOG_MIN_LEVEL <= SPDLOG_LOGLEVEL_WARNING
-#define SPDLOG_WARN(logger, ...) logger->update_tracer(__FILE__, __LINE__, __FUNCTION__, __SPD_PRETTY_FUNCTION__).warn(__VA_ARGS__)
-#define SPDLOG_WARN_IF(logger, flag, ...) logger->update_tracer(__FILE__, __LINE__, __FUNCTION__, __SPD_PRETTY_FUNCTION__).warn_if(flag, __VA_ARGS__)
+#define SPDLOG_WARN(logger, ...) logger-> MAYBE_TRACE warn(__VA_ARGS__)
+#define SPDLOG_WARN_IF(logger, flag, ...) logger-> MAYBE_TRACE warn_if(flag, __VA_ARGS__)
 #else
 #define SPDLOG_WARN(logger, ...)
 #define SPDLOG_WARN_IF(logger, flag, ...)
 #endif
 
 #if SPDLOG_MIN_LEVEL <= SPDLOG_LOGLEVEL_ERROR
-#define SPDLOG_ERROR(logger, ...) logger->update_tracer(__FILE__, __LINE__, __FUNCTION__, __SPD_PRETTY_FUNCTION__).error(__VA_ARGS__)
-#define SPDLOG_ERROR_IF(logger, flag, ...) logger->update_tracer(__FILE__, __LINE__, __FUNCTION__, __SPD_PRETTY_FUNCTION__).error_if(flag, __VA_ARGS__)
+#define SPDLOG_ERROR(logger, ...) logger-> MAYBE_TRACE error(__VA_ARGS__)
+#define SPDLOG_ERROR_IF(logger, flag, ...) logger-> MAYBE_TRACE error_if(flag, __VA_ARGS__)
 #else
 #define SPDLOG_ERROR(logger, ...)
 #define SPDLOG_ERROR_IF(logger, flag, ...)
 #endif
 
 #if SPDLOG_MIN_LEVEL <= SPDLOG_LOGLEVEL_CRITICAL
-#define SPDLOG_CRITICAL(logger, ...) logger->update_tracer(__FILE__, __LINE__, __FUNCTION__, __SPD_PRETTY_FUNCTION__).critical(__VA_ARGS__)
-#define SPDLOG_CRITICAL_IF(logger, flag, ...) logger->update_tracer(__FILE__, __LINE__, __FUNCTION__, __SPD_PRETTY_FUNCTION__).critical_if(flag, __VA_ARGS__)
+#define SPDLOG_CRITICAL(logger, ...) logger-> MAYBE_TRACE critical(__VA_ARGS__)
+#define SPDLOG_CRITICAL_IF(logger, flag, ...) logger-> MAYBE_TRACE critical_if(flag, __VA_ARGS__)
 #else
 #define SPDLOG_CRITICAL(logger, ...)
 #define SPDLOG_CRITICAL_IF(logger, flag, ...)

@@ -480,7 +480,7 @@ class full_formatter SPDLOG_FINAL:public flag_formatter
     }
 };
 
-
+#ifdef ENABLE_TRACING
 
 // short file name
 class shortfilename_formatter SPDLOG_FINAL:public flag_formatter
@@ -529,7 +529,7 @@ class prettyfunction_formatter SPDLOG_FINAL:public flag_formatter
         msg.formatted << msg.tracer.func_pretty;
     }
 };
-
+#endif
 
 
 }
@@ -703,7 +703,7 @@ inline void spdlog::pattern_formatter::handle_flag(char flag)
     case ('i'):
         _formatters.push_back(std::unique_ptr<details::flag_formatter>(new details::i_formatter()));
         break;
-
+#ifdef ENABLE_TRACING
     case ('J'):
         _formatters.push_back(std::unique_ptr<details::flag_formatter>(new details::filename_formatter()));
         break;
@@ -723,7 +723,7 @@ inline void spdlog::pattern_formatter::handle_flag(char flag)
     case ('U'):
         _formatters.push_back(std::unique_ptr<details::flag_formatter>(new details::prettyfunction_formatter()));
         break;
-
+#endif
     default: //Unknown flag appears as is
         _formatters.push_back(std::unique_ptr<details::flag_formatter>(new details::ch_formatter('%')));
         _formatters.push_back(std::unique_ptr<details::flag_formatter>(new details::ch_formatter(flag)));

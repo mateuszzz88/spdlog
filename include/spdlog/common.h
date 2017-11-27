@@ -163,9 +163,11 @@ using filename_t = std::string;
 #endif
 
 struct trace_info {
+#ifdef ENABLE_TRACING
     std::string func_raw;
     std::string func_pretty;
     std::string filename;
     int lineno=-1;
+#endif
 };
 } //spdlog

@@ -558,6 +558,7 @@ inline const std::vector<spdlog::sink_ptr>& spdlog::logger::sinks() const
     return _sinks;
 }
 
+#ifdef ENABLE_TRACING
 inline spdlog::logger& spdlog::logger::update_tracer(std::string file, int lineno, std::string func, std::string prettyfunc) {
     tracer.filename = std::move(file);
     tracer.lineno = lineno;
@@ -565,4 +566,4 @@ inline spdlog::logger& spdlog::logger::update_tracer(std::string file, int linen
     tracer.func_pretty = std::move(prettyfunc);
     return *this;
 }
-
+#endif

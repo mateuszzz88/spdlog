@@ -1,4 +1,4 @@
-
+#define ENABLE_TRACING
 #include "includes.h"
 #include <iostream>
 
